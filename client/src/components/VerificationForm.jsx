@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { fetchWithAuth } from "../utils/tokenStorage";
+import { API_BASE_URL } from "../config/api";
 
 const VerificationForm = () => {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ const VerificationForm = () => {
       if (profilePicture) payload.append("profilePicture", profilePicture);
 
       const response = await fetchWithAuth(
-        "http://localhost:3000/user/dashboard/verify",
+        `${API_BASE_URL}/user/dashboard/verify`,
         {
           method: "POST",
           body: payload,
@@ -102,7 +103,7 @@ const VerificationForm = () => {
     const loadProfile = async () => {
       try {
         const response = await fetchWithAuth(
-          "http://localhost:3000/user/dashboard",
+          `${API_BASE_URL}/user/dashboard`,
           { method: "GET" },
         );
         const data = await response.json();

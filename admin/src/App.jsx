@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { setAccessToken } from "./utils/tokenStorage.js";
+import { API_BASE_URL } from "./config/api.js";
 
 export default function App() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function App() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/admin/login", {
+      const response = await fetch(`${API_BASE_URL}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

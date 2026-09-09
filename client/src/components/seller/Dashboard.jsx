@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { fetchWithAuth } from "../../utils/tokenStorage";
+import { API_BASE_URL } from "../../config/api";
 
 const SellerDashboard = () => {
   const [properties, setProperties] = useState([]);
@@ -12,7 +13,7 @@ const SellerDashboard = () => {
 
     const loadSellerProperties = async () => {
       try {
-        const response = await fetchWithAuth("http://localhost:3000/user/seller/properties", {
+        const response = await fetchWithAuth(`${API_BASE_URL}/user/seller/properties`, {
           method: "GET",
         });
         const data = await response.json();
@@ -44,7 +45,7 @@ const SellerDashboard = () => {
 
   const handleToggleStatus = async (id) => {
     try {
-      const response = await fetchWithAuth(`http://localhost:3000/user/seller/properties/${id}/status`, {
+      const response = await fetchWithAuth(`${API_BASE_URL}/user/seller/properties/${id}/status`, {
         method: "PATCH",
       });
       const data = await response.json();
@@ -67,7 +68,7 @@ const SellerDashboard = () => {
     }
 
     try {
-      const response = await fetchWithAuth(`http://localhost:3000/user/seller/properties/${id}`, {
+      const response = await fetchWithAuth(`${API_BASE_URL}/user/seller/properties/${id}`, {
         method: "DELETE",
       });
       const data = await response.json();

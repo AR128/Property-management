@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "../config/api.js";
+
 export const getAccessToken = () => sessionStorage.getItem("accessToken");
 
 export const setAccessToken = (token) => {
@@ -53,7 +55,7 @@ export const refreshAccessToken = async () => {
 
   refreshPromise = (async () => {
     try {
-      const response = await fetch("http://localhost:3000/user/refresh", {
+      const response = await fetch(`${API_BASE_URL}/user/refresh`, {
         method: "POST",
         credentials: "include",
       });

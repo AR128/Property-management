@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router";
 import { fetchWithAuth } from "../utils/tokenStorage";
+import { API_BASE_URL } from "../config/api";
 
 const Seller = () => {
   const location = useLocation();
@@ -11,7 +12,7 @@ const Seller = () => {
   useEffect(() => {
     const checkSellerAccess = async () => {
       try {
-        const response = await fetchWithAuth("http://localhost:3000/user/dashboard", {
+        const response = await fetchWithAuth(`${API_BASE_URL}/user/dashboard`, {
           method: "GET",
         });
         const data = await response.json();

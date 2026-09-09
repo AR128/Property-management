@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router";
 import { clearAccessToken, fetchWithAuth } from "../utils/tokenStorage";
 import ConsentModal from "../components/ConsentModal";
 import PropertyDetailModal from "../components/PropertyDetailModal";
+import { API_BASE_URL } from "../config/api";
 
 const PROPERTY_TYPES = ["All", "Apartment", "Independent house", "Villa", "Plot", "Commercial"];
 
@@ -25,7 +26,7 @@ const Dashboard = () => {
     const loadUser = async () => {
       try {
         const response = await fetchWithAuth(
-          "http://localhost:3000/user/dashboard",
+          `${API_BASE_URL}/user/dashboard`,
           { method: "GET" },
         );
         const data = await response.json();
@@ -35,7 +36,7 @@ const Dashboard = () => {
         }
 
         const propertiesResponse = await fetchWithAuth(
-          "http://localhost:3000/user/properties",
+          `${API_BASE_URL}/user/properties`,
           { method: "GET" },
         );
         if (propertiesResponse.ok) {

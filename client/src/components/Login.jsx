@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { setAccessToken } from "../utils/tokenStorage";
+import { API_BASE_URL } from "../config/api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/user/login", {
+      const response = await fetch(`${API_BASE_URL}/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

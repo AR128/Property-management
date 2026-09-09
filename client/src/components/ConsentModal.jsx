@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetchWithAuth } from "../utils/tokenStorage";
+import { API_BASE_URL } from "../config/api";
 
 const ConsentModal = ({ isOpen, onClose, onSuccess }) => {
   const [agreed, setAgreed] = useState(false);
@@ -18,7 +19,7 @@ const ConsentModal = ({ isOpen, onClose, onSuccess }) => {
     setError("");
 
     try {
-      const response = await fetchWithAuth("http://localhost:3000/user/seller/consent", {
+      const response = await fetchWithAuth(`${API_BASE_URL}/user/seller/consent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ consentAgreed: true }),

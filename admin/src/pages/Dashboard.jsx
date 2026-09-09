@@ -4,6 +4,7 @@ import { clearAccessToken, fetchWithAuth } from "../utils/tokenStorage";
 import SellerDetailModal from "../components/SellerDetailModal";
 import ListingDetailModal from "../components/ListingDetailModal";
 import CustomerDetailModal from "../components/CustomerDetailModal";
+import { API_BASE_URL } from "../config/api.js";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -33,21 +34,21 @@ const Dashboard = () => {
     const loadAllAdminData = async () => {
       try {
         // Fetch Sellers List
-        const sellersRes = await fetchWithAuth("http://localhost:3000/admin/sellers", { method: "GET" });
+        const sellersRes = await fetchWithAuth(`${API_BASE_URL}/admin/sellers`, { method: "GET" });
         if (sellersRes.ok && !isCancelled) {
           const data = await sellersRes.json();
           setSellers(data.sellers || []);
         }
 
         // Fetch Buyers List
-        const buyersRes = await fetchWithAuth("http://localhost:3000/admin/buyers", { method: "GET" });
+        const buyersRes = await fetchWithAuth(`${API_BASE_URL}/admin/buyers`, { method: "GET" });
         if (buyersRes.ok && !isCancelled) {
           const data = await buyersRes.json();
           setBuyers(data.buyers || []);
         }
 
         // Fetch Properties List
-        const propRes = await fetchWithAuth("http://localhost:3000/admin/properties", { method: "GET" });
+        const propRes = await fetchWithAuth(`${API_BASE_URL}/admin/properties`, { method: "GET" });
         if (propRes.ok && !isCancelled) {
           const data = await propRes.json();
           setProperties(data.properties || []);
@@ -75,7 +76,7 @@ const Dashboard = () => {
   const handleApprove = async (id) => {
     setActionLoading(id);
     try {
-      const response = await fetchWithAuth(`http://localhost:3000/admin/properties/${id}/approve`, {
+      const response = await fetchWithAuth(`${API_BASE_URL}/admin/properties/${id}/approve`, {
         method: "PATCH",
       });
       const data = await response.json();
@@ -101,7 +102,7 @@ const Dashboard = () => {
   const handleReject = async (id) => {
     setActionLoading(id);
     try {
-      const response = await fetchWithAuth(`http://localhost:3000/admin/properties/${id}/reject`, {
+      const response = await fetchWithAuth(`${API_BASE_URL}/admin/properties/${id}/reject`, {
         method: "PATCH",
       });
       const data = await response.json();
@@ -129,7 +130,7 @@ const Dashboard = () => {
 
     setActionLoading(id);
     try {
-      const response = await fetchWithAuth(`http://localhost:3000/admin/properties/${id}`, {
+      const response = await fetchWithAuth(`${API_BASE_URL}/admin/properties/${id}`, {
         method: "DELETE",
       });
       const data = await response.json();

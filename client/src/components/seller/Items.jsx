@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { fetchWithAuth } from "../../utils/tokenStorage";
+import { API_BASE_URL } from "../../config/api";
 
 const AMENITY_OPTIONS = [
   "Swimming Pool",
@@ -122,7 +123,7 @@ const Items = () => {
         payload.append("images", file);
       });
 
-      const response = await fetchWithAuth("http://localhost:3000/user/seller/properties", {
+      const response = await fetchWithAuth(`${API_BASE_URL}/user/seller/properties`, {
         method: "POST",
         body: payload,
       });
